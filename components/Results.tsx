@@ -20,98 +20,130 @@ const Results: React.FC<ResultsProps> = ({ userData }) => {
       }
     });
 
-    const situ = userData.responses['situ'];
-    const want = userData.responses['want'];
-    const hard = userData.responses['hard'];
+    const situ = userData.responses['situ'] || "";
+    const want = userData.responses['want'] || "";
+    const hard = userData.responses['hard'] || "";
     
     let headline = "";
+    let subHeadline = "";
     let insights: { label: string; text: string }[] = [];
 
-    if (score >= 16) {
-      if (situ === 'In a relationship') {
-        headline = "You are currently prioritizing the survival of the relationship over your own well-being.";
-      } else if (situ === 'Emotionally detached but still staying') {
-        headline = "You have checked out emotionally because your standards were not invited to stay.";
+    if (score >= 18) {
+      if (situ.includes('detached') || hard === 'Fear of regret') {
+        headline = "You are currently living in a 'waiting room' state, hoping for a change that your intuition already knows won't come.";
+        subHeadline = "It's understandable to wait for a sign, but your exhaustion is a sign in itself. You aren't the only one who has hoped for change.";
+        insights = [
+          { label: "The Pattern", text: "You've stayed long enough for the dysfunction to feel like a baseline. Your body is tired even when your mind is trying to solve the puzzle." },
+          { label: "The Identity Cost", text: "You are editing yourself so heavily to maintain the relationship that you are starting to lose track of what you actually value." },
+          { label: "The Hard Truth", text: "Fear of regret is keeping you in a situation that is actively generating the very regret you are trying to avoid." }
+        ];
       } else if (situ === 'Recently separated') {
-        headline = "The weight you feel now is the realization of how much you were actually tolerating.";
+        headline = "The exhaustion you feel is the sudden release of years of emotional management.";
+        subHeadline = "Transitioning from constant management to quiet is a shock. Many men before you have felt this specific kind of heavy silence.";
+        insights = [
+          { label: "What this shows", text: "You weren't just in a relationship; you were in a full-time role as a shock absorber for someone else's instability." },
+          { label: "The Reality Check", text: "Missing them is often just your brain craving the familiar stress cycles it has been conditioned to survive." },
+          { label: "Next Step", text: "Clarity won't come from 'moving on' yet; it comes from documenting exactly how much you were actually tolerating." }
+        ];
       } else {
-        headline = "You’re operating without clear standards right now.";
+        headline = "Your standards haven't been 'lowered'—they've been systematically ignored until you stopped speaking them.";
+        subHeadline = "Compromising your core shouldn't be the price of a relationship. You are rediscovering what you deserve.";
+        insights = [
+          { label: "The Core Issue", text: "You've mistaken 'being a good partner' for 'being a silent partner.' You are carrying the weight of two people's emotional needs." },
+          { label: "Where Peace is Blocked", text: "You are waiting for permission to be happy, but that permission must come from the version of you that used to have boundaries." },
+          { label: "The Path Forward", text: "Start with small, non-negotiable standards for your own time and space before trying to fix the larger dynamic." }
+        ];
       }
-
-      insights = [
-        { label: "What this shows", text: "You have normalized environments that actively drain your peace of mind to avoid conflict." },
-        { label: "Where clarity is missing", text: "The distinction between 'being patient' and 'losing your identity' has become dangerously blurred." },
-        { label: "Where self-respect is being tested", text: "You are likely waiting for permission to value yourself as much as you value the dynamic." }
-      ];
-    } else if (score >= 8) {
-      if (want === 'Peace') {
-        headline = "The peace you're seeking is currently being blocked by the inconsistency you're tolerating.";
-      } else if (situ === 'Unsure what to do') {
-        headline = "Your hesitation is a conflict between the comfort of the familiar and the cost of the status quo.";
-      } else if (hard === 'Speaking up') {
-        headline = "Your silence isn't keeping the peace; it's just storing the conflict inside yourself.";
+    } else if (score >= 10) {
+      if (want.includes('Peace') && hard === 'Speaking up') {
+        headline = "You are trading your internal peace for external quiet, and it's starting to cost you your self-respect.";
+        subHeadline = "Silence isn't always peace. Thousands of people are currently learning how to speak their truth again, just like you.";
+        insights = [
+          { label: "The Observation", text: "Things are 'good enough' to stay but 'bad enough' to keep you checking your phone for advice or scrolling for answers." },
+          { label: "The Conflict", text: "You are highly sensitive to your partner's moods, which has turned you into an expert at 'pre-emptive management' rather than direct communication." },
+          { label: "The Insight", text: "A relationship that requires you to walk on eggshells is not a partnership; it's a performance." }
+        ];
+      } else if (hard === 'Trusting my judgment') {
+        headline = "Your judgment is fine; your environment is simply designed to make you second-guess it.";
+        subHeadline = "You aren't losing your mind; you're just in an environment that makes it hard to trust your own eyes.";
+        insights = [
+          { label: "The Reality", text: "Inconsistency (the 'hot and cold' cycle) is scientifically proven to create the most addictive and confusing emotional bonds." },
+          { label: "The Pattern", text: "You are focused on 'potential'—the person they are at their best—rather than the person they are during a Tuesday afternoon argument." },
+          { label: "What's Missing", text: "Consistency is a baseline requirement, not a bonus feature. You are currently treating basic respect as a reward." }
+        ];
       } else {
-        headline = "Your answers suggest you’re not confused. You’re experiencing inconsistency.";
+        headline = "You are currently in the 'Gray Zone'—where the good days provide just enough oxygen to survive the bad ones.";
+        subHeadline = "The gray zone is where most people live before they decide they want something better. This is part of your journey.";
+        insights = [
+          { label: "What this shows", text: "You're not looking for a way out; you're looking for a way for things to finally make sense. But logic cannot fix a values mismatch." },
+          { label: "The Standard", text: "A healthy relationship should be a safe harbor, not the primary source of your stress." },
+          { label: "The Shift", text: "Stop asking 'How can I make them understand?' and start asking 'How much longer can I live like this?'" }
+        ];
       }
-
-      insights = [
-        { label: "What this shows", text: "Things work just well enough for you to stay, but the low points are slowly eroding your long-term confidence." },
-        { label: "Where clarity is missing", text: "You are waiting for a pattern to break that might actually be the baseline of the relationship." },
-        { label: "What you’re ignoring", text: "The gut feeling that says your basic needs shouldn't feel like 'extra' requests." }
-      ];
     } else {
-      if (hard === 'Trusting my judgment') {
-        headline = "Your judgment is working perfectly; it's simply telling you something you aren't ready to hear yet.";
-      } else if (want === 'Clarity') {
-        headline = "You already have clarity; what you're actually seeking is the courage to act on it.";
+      if (want.includes('Clarity') || hard === 'Fear of regret') {
+        headline = "You already have the clarity you need; you are simply waiting for it to feel less painful.";
+        subHeadline = "Facing the truth doesn't make the pain a mistake. It's a common step on the path to real stability.";
+        insights = [
+          { label: "The Observation", text: "You have strong standards, but you are currently making an 'exception' that is starting to feel like a new rule." },
+          { label: "The Intuition", text: "Your 'overthinking' is actually just your intuition trying to get your attention about a boundary that was crossed." },
+          { label: "The Insight", text: "Healthy relationships don't make you feel like you're losing your mind. If you feel 'crazy,' look at the behavior that triggered the feeling." }
+        ];
       } else {
-        headline = "What feels like confusion is actually your intuition asking for higher standards.";
+        headline = "You are standing at a threshold where your self-respect is finally outweighing your attachment.";
+        subHeadline = "This quiet realization is a shared experience of everyone who has ever reclaimed their life.";
+        insights = [
+          { label: "What this shows", text: "You've done the work to be a better man, but you're realizing that you can't do the work for both people." },
+          { label: "The Reality", text: "The friction you feel isn't 'failure'—it's your growth outstripping the current capacity of the relationship." },
+          { label: "The Takeaway", text: "Clarity is often just the quiet realization that you are finished trying to prove your worth to someone who isn't looking." }
+        ];
       }
-
-      insights = [
-        { label: "What this shows", text: "You have a solid foundation, but specific recurring conflicts are triggering a protective mechanism." },
-        { label: "Where clarity is missing", text: "You need to distinguish between a healthy growth period and a fundamental values clash." },
-        { label: "What you already know", text: "You know what respect looks like; you just need to decide if this environment can sustain it." }
-      ];
     }
 
-    return { headline, insights };
+    return { headline, subHeadline, insights };
   }, [userData.responses]);
 
   return (
-    <div className="animate-in fade-in duration-1000 space-y-12 pb-16">
-      <div className="text-center">
-        <p className="text-gray-400 text-[10px] uppercase tracking-[0.3em] mb-4 font-bold">Personal Clarity Report</p>
-        <h2 className="text-2xl sm:text-3xl font-medium text-gray-800 leading-tight max-w-lg mx-auto font-serif">
-          {result.headline}
+    <div className="animate-in fade-in duration-1000 space-y-16 pb-20">
+      <div className="text-center px-2">
+        <p className="text-gray-400 text-[10px] uppercase tracking-[0.4em] mb-6 font-bold">Confidential Insight Report</p>
+        <h2 className="text-2xl sm:text-3xl font-medium text-gray-800 leading-[1.35] max-w-lg mx-auto font-serif italic mb-4">
+          "{result.headline}"
         </h2>
+        <p className="text-[14px] sm:text-[15px] text-gray-500 font-light leading-relaxed max-w-md mx-auto italic">
+          {result.subHeadline}
+        </p>
       </div>
 
-      <div className="space-y-10">
+      <div className="space-y-12">
         {result.insights.map((insight, idx) => (
-          <div key={idx} className="border-l-2 border-gray-100 pl-6 py-1">
-            <h3 className="text-[10px] uppercase tracking-[0.2em] font-bold text-gray-400 mb-3">
+          <div key={idx} className="relative pl-7 sm:pl-9">
+            <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-gray-100" />
+            <div className="absolute left-0 top-1.5 w-[5px] h-[5px] bg-gray-900 rounded-full -translate-x-1/2" />
+            
+            <h3 className="text-[10px] uppercase tracking-[0.25em] font-bold text-gray-400 mb-4">
               {insight.label}
             </h3>
-            <p className="text-base sm:text-lg text-gray-700 font-light leading-relaxed">
+            <p className="text-[16px] sm:text-[18px] text-gray-700 font-light leading-relaxed">
               {insight.text}
             </p>
           </div>
         ))}
       </div>
 
-      <div className="bg-white p-8 sm:p-10 rounded-2xl mt-16 border border-gray-100 text-center shadow-sm">
-        <h3 className="text-[10px] uppercase tracking-[0.3em] font-bold text-gray-400 mb-6 italic">A Calm Next Step</h3>
-        <p className="text-base sm:text-lg text-gray-600 font-light mb-10 leading-relaxed italic">
-          “If you want something calm to return to when emotions spike, I wrote a short guide for exactly this.”
+      <div className="bg-white p-8 sm:p-12 rounded-[2rem] border border-gray-100 text-center shadow-sm mt-24">
+        <div className="w-10 h-1 bg-gray-100 mx-auto mb-8 rounded-full" />
+        <h3 className="text-[11px] uppercase tracking-[0.3em] font-bold text-gray-400 mb-6 italic">Next Steps</h3>
+        <p className="text-base sm:text-lg text-gray-700 font-light mb-12 leading-relaxed">
+          “If you want something calm to return to when emotions spike, I wrote a short guide designed exactly for this moment.”
         </p>
         <a
-          href="https://ceox.gumroad.com/l/standards-for-men?wanted=true" 
+          href="https://ceox.gumroad.com/l/standards-for-men" 
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block w-full sm:w-auto px-12 py-5 bg-gray-900 text-white rounded-xl hover:bg-gray-800 transition-all duration-300 tracking-wide font-medium shadow-md active:scale-95"
+          className="inline-block w-full px-8 py-5 bg-gray-900 text-white rounded-xl hover:bg-black transition-all duration-300 tracking-widest font-bold text-[13px] uppercase shadow-xl active:scale-95"
         >
-          Read the guide
+          Read the Guide
         </a>
       </div>
     </div>

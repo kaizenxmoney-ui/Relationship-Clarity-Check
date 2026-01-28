@@ -12,7 +12,7 @@ export const STANDARDS_QUESTIONS: Question[] = [
     id: 'q2', 
     text: 'Do you feel respected even during conflict?', 
     type: 'standard',
-    options: ['Always', 'Mostly', 'Seldom', 'Not at all']
+    options: ['Always', 'Mostly', 'Rarely', 'Not at all']
   },
   { 
     id: 'q3', 
@@ -46,7 +46,7 @@ export const STANDARDS_QUESTIONS: Question[] = [
   },
   { 
     id: 'q8', 
-    text: 'Do you trust that your partner has your best interests at heart?', 
+    text: 'Do you generally trust that your partner has your best interests at heart?', 
     type: 'standard',
     options: ['Unshakeable', 'Usually', 'I have doubts', 'Not at all']
   },
@@ -63,6 +63,7 @@ export const QUALIFYING_QUESTIONS: Question[] = [
     id: 'want',
     text: 'What do you want most right now?',
     type: 'qualifying',
+    multiple: true,
     options: ['Clarity', 'Peace', 'Confidence in my decision', 'To stop overthinking']
   },
   {

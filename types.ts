@@ -1,5 +1,5 @@
 
-export type Step = 'landing' | 'email' | 'assessment' | 'results';
+export type Step = 'landing' | 'email' | 'assessment' | 'loading' | 'results';
 
 export type ResponseValue = 'Yes' | 'Sometimes' | 'Rarely' | 'Not at all';
 
@@ -8,6 +8,7 @@ export interface Question {
   text: string;
   type: 'standard' | 'qualifying' | 'open';
   options?: string[];
+  multiple?: boolean;
 }
 
 export interface UserData {
@@ -23,6 +24,7 @@ export interface ClarityInsight {
 
 export interface ResultContent {
   headline: string;
+  subHeadline: string;
   insights: {
     label: string;
     text: string;

@@ -4,6 +4,7 @@ import { Step, UserData } from './types';
 import Landing from './components/Landing';
 import EmailStep from './components/EmailStep';
 import AssessmentStep from './components/AssessmentStep';
+import LoadingStep from './components/LoadingStep';
 import Results from './components/Results';
 
 const App: React.FC = () => {
@@ -27,8 +28,13 @@ const App: React.FC = () => {
 
   const handleAssessmentComplete = useCallback((responses: Record<string, string>) => {
     setUserData(prev => ({ ...prev, responses }));
-    setStep('results');
+    setStep('loading');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    setTimeout(() => {
+      setStep('results');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 8500);
   }, []);
 
   const renderStep = () => {
@@ -39,6 +45,8 @@ const App: React.FC = () => {
         return <EmailStep onNext={handleEmailSubmit} />;
       case 'assessment':
         return <AssessmentStep onComplete={handleAssessmentComplete} />;
+      case 'loading':
+        return <LoadingStep />;
       case 'results':
         return <Results userData={userData} />;
       default:
@@ -47,12 +55,14 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center py-8 sm:py-16 px-4 sm:px-6 bg-[#fcfcfc] text-[#1a1a1a]">
-      <div className="w-full max-w-lg">
+    <div className="min-h-screen flex flex-col items-center bg-[#fcfcfc] text-[#1a1a1a] selection:bg-gray-200">
+      <main className="w-full max-w-[440px] px-6 pt-12 pb-24 sm:pt-20 sm:pb-32 flex-grow">
         {renderStep()}
-      </div>
-      <footer className="mt-auto pt-12 pb-6 text-center text-gray-400 text-[10px] uppercase tracking-[0.2em] font-medium">
-        Relationship Clarity Check &copy; {new Date().getFullYear()}
+      </main>
+      <footer className="w-full max-w-lg py-8 text-center">
+        <p className="text-gray-400 text-[9px] uppercase tracking-[0.3em] font-bold">
+          Confidential Clarity Check &copy; {new Date().getFullYear()}
+        </p>
       </footer>
     </div>
   );
