@@ -8,6 +8,12 @@ interface LandingProps {
 const Landing: React.FC<LandingProps> = ({ onStart }) => {
   return (
     <div className="text-center animate-in fade-in slide-in-from-bottom-2 duration-1000">
+      <div className="inline-block px-3 py-1 bg-gray-50 rounded-full border border-gray-100 mb-6">
+        <p className="text-[10px] text-gray-500 uppercase tracking-[0.2em] font-medium">
+          PRIVATE CLARITY CHECK • 3 Minute Read
+        </p>
+      </div>
+
       <h1 className="text-2xl sm:text-3xl md:text-4xl font-medium mb-8 text-gray-800 leading-[1.3] font-serif">
         If you’re scrolling after an argument, this will help you think clearly.
       </h1>
@@ -36,10 +42,6 @@ const Landing: React.FC<LandingProps> = ({ onStart }) => {
             </li>
           </ul>
         </div>
-
-        <p className="text-[10px] text-gray-400 uppercase tracking-[0.2em] font-bold">
-          3 minutes • Free • Completely Private
-        </p>
       </div>
 
       <div className="space-y-6">
@@ -50,9 +52,19 @@ const Landing: React.FC<LandingProps> = ({ onStart }) => {
           Start the clarity check
         </button>
         
-        <p className="text-[11px] sm:text-[12px] text-gray-400 font-light tracking-wide italic">
-          No advice. No judgment. Just clarity.
-        </p>
+        <div className="flex items-center justify-center space-x-3">
+          <p className="text-[11px] text-gray-400 font-light tracking-wide italic">
+            3 minutes
+          </p>
+          <span className="w-1 h-1 bg-gray-200 rounded-full"></span>
+          <p className="text-[11px] text-gray-400 font-light tracking-wide italic">
+            Completely Private
+          </p>
+          <span className="w-1 h-1 bg-gray-200 rounded-full"></span>
+          <p className="text-[11px] text-gray-400 font-light tracking-wide italic">
+            No Judgment
+          </p>
+        </div>
       </div>
     </div>
   );

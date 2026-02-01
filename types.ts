@@ -1,5 +1,5 @@
 
-export type Step = 'landing' | 'email' | 'assessment' | 'loading' | 'results';
+export type Step = 'landing' | 'auth' | 'assessment' | 'loading' | 'results';
 
 export type ResponseValue = 'Yes' | 'Sometimes' | 'Rarely' | 'Not at all';
 

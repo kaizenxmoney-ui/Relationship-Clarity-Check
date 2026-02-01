@@ -134,11 +134,14 @@ const Results: React.FC<ResultsProps> = ({ userData }) => {
       <div className="bg-white p-8 sm:p-12 rounded-[2rem] border border-gray-100 text-center shadow-sm mt-24">
         <div className="w-10 h-1 bg-gray-100 mx-auto mb-8 rounded-full" />
         <h3 className="text-[11px] uppercase tracking-[0.3em] font-bold text-gray-400 mb-6 italic">Next Steps</h3>
-        <p className="text-base sm:text-lg text-gray-700 font-light mb-12 leading-relaxed">
-          “If you want something calm to return to when emotions spike, I wrote a short guide designed exactly for this moment.”
+        <p className="text-base sm:text-lg text-gray-700 font-light mb-12 leading-relaxed whitespace-pre-line">
+          “You don’t need motivation right now.
+          You need something steady to think against when emotions spike.”
+          {"\n\n"}
+          I wrote a short guide for the moments when clarity starts slipping and you don’t want to lose yourself again.
         </p>
         <a
-          href="https://ceox.gumroad.com/l/standards-for-men" 
+          href="https://ceox.gumroad.com/l/the-cost-of-staying" 
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block w-full px-8 py-5 bg-gray-900 text-white rounded-xl hover:bg-black transition-all duration-300 tracking-widest font-bold text-[13px] uppercase shadow-xl active:scale-95"
